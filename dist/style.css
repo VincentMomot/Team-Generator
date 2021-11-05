@@ -1,0 +1,58 @@
+*{
+    font-family: sans-serif;
+}
+
+h1{
+    background-color: green;
+    text-align: center;
+    color:white;
+    padding:2% 0%;
+    width:100%;
+}
+
+#body{
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.employee{
+    width:240px;
+    margin-top: 0px;
+    box-shadow: 5px 4px lightgrey;
+    border-radius: 5px;
+    margin: 7px;
+   
+}
+
+.cardTop{
+    color:white;
+    background-color: rgb(72, 72, 255);
+    font-size:larger;
+    margin: 0%;
+    border-radius: 5px 5px 0px 0px; 
+    padding: 10px 0px;
+    
+}
+.name{
+    font-size: 26px;
+}
+
+p{
+    margin: 0px 0px 0px 8px;
+    padding:5px;
+}
+
+.cardBot{
+    background-color: rgb(225, 232, 235);
+    font-size: small;
+    margin: 0px;
+    padding: 20px 6px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.cardBot p{
+    background-color: white;
+    margin:10px;
+    padding: 10px;   
+}
