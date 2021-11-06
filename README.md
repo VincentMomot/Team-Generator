@@ -1,4 +1,4 @@
-# Vince-s-Team-Generator
+# Vince's-Team-Generator
 This application is used to create a team layout for all members inculding engineer, intern and manager.
 
 
@@ -10,8 +10,6 @@ This application is used to create a team layout for all members inculding engin
 
 ### What I learned from the creation of this site:
 * Better understanding of Node.js
-
-Try your hand at the Quiz at [Vincent D Momot's JS Quiz](https://vincentmomot.github.io/Team-Generator)
 
 Screenshots of the site:
 ![This is an image of my main page](assets/)
