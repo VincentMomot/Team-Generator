@@ -1,5 +1,5 @@
 const createManager = function (manager) {
-    return
+    return 
     ` <div class="employee">
     <div class="cardTop">    
         <p class=name>${manager.name}</p>
