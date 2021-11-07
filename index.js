@@ -8,116 +8,151 @@ const Manager = require('./lib/manager')
 const Employee = require('./lib/employee')
 const generateHTML = require('./src/generateHTML')
 
+const OUTPUT_DIR = path.resolve(__dirname, "dist")
+const HTMLcreated = path.join(OUTPUT_DIR, "index.html");
+console.log("\nWelcome to team generator!")
 let members = [];
 
-// TODO: Create an array of questions for user input
+function teamMember() {
 
-const oneManager = () => {
-    return inquirer.prompt([
+    inquirer.prompt([
         {
             type: "input",
-            message: "What is the team manager's name?",
-            name: "name"
+            message: "What is your manager's name?",
+            name: "name",
         },
         {
             type: "input",
-            message: "What is the team manager's ID number?",
-            name: "id"
+            message: "What is your manager's id?",
+            name: "id",
         },
         {
             type: "input",
-            message: "What is the team manager's email?",
-            name: "email"
+            message: "What is your manager's email?",
+            name: "email",
         },
         {
             type: "input",
-            message: "What is the team manager's office number?",
-            name: "phone"
+            message: "What is your manager's office number?",
+            name: "phone",
         }
-
     ])
-        .then(answers => {
-            const { name, id, email, phone } = managerInfo
-            const manager = new Manager(name, id, email, phone)
 
+        .then(function (answers) {
+            let manager = new Manager(answers.name, answers.id, answers.email, answers.phone);
             members.push(manager)
-            console.log(manager)
+            nextMem()
         })
-}
-async function nextMem() {
-    try {
-        let nextMember = await inquirer.prompt([
-            {
-                type: "rawlist",
-                message: "Which type of team member would you like to add?",
-                name: "nextMem",
-                choices: [
-                    'Engineer',
-                    'Intern',
-                    "I don't want to add any more members"
-                ]
-
-            }
-        ])
+        .catch(function (err) {
+            console.log(err);
+        });
 
 
-        if (nextMember.nextMem == "Engineer") {
-            inquirer.prompt([
+    async function nextMem() {
+        try {
+            //console.log(members)
+            let teamChoice = await inquirer.prompt([
                 {
-                    type: "input",
-                    message: "What is the team engineer's name?",
-                    name: "name"
-                },
-                {
-                    type: "input",
-                    message: "What is the team engineer's ID number?",
-                    name: "id"
-                },
-                {
-                    type: "input",
-                    message: "What is the team engineer's email?",
-                    name: "email"
-                },
-                {
-                    type: "input",
-                    message: "What is the engineer's GitHub username?",
-                    name: "gitHub"
-                },
-
-            ]).then(answers => {
-                return (answers)
-            })
-        }
-
-        function intern() {
-            inquirer.prompt([
-                {
-                    type: "input",
-                    message: "What is the team intern's name?",
-                    name: "name"
-                },
-                {
-                    type: "input",
-                    message: "What is the team intern's ID number?",
-                    name: "id"
-                },
-                {
-                    type: "input",
-                    message: "What is the team intern's email?",
-                    name: "email"
-                },
-                {
-                    type: "input",
-                    message: "What is the intern's school?",
-                    name: "school"
+                    type: 'list',
+                    name: 'team',
+                    message: 'Which type of team member would you like to add',
+                    choices: ['Engineer', 'Intern', 'I don\'t want to add anymore team members.']
                 }
-            ]).then(answers => {
-                return (answers)
-            })
+            ]);
 
+            if (teamChoice.team === 'Engineer') {
+
+                inquirer.prompt([
+                    {
+                        type: "input",
+                        message: "What is your engineer's name?",
+                        name: "name",
+                    },
+                    {
+                        type: "input",
+                        message: "What is your engineer's id?",
+                        name: "id",
+                    },
+                    {
+                        type: "input",
+                        message: "What is your engineer's email?",
+                        name: "email",
+                    },
+                    {
+                        type: "input",
+                        message: "What is your engineer's GitHub username?",
+                        name: "github",
+                    }
+                ])
+
+                    .then(function (answers) {
+                        let engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+                        members.push(engineer);
+                        nextMem();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
+
+            } else if (teamChoice.team === 'Intern') {
+                inquirer.prompt([
+                    {
+                        type: "input",
+                        message: "What is your intern's name?",
+                        name: "name",
+                    },
+                    {
+                        type: "input",
+                        message: "What is your intern's id?",
+                        name: "id",
+                    },
+                    {
+                        type: "input",
+                        message: "What is your intern's email?",
+                        name: "email",
+                    },
+                    {
+                        type: "input",
+                        message: "What is your intern's school?",
+                        name: "school",
+                    }
+                ])
+                    .then(function (answers) {
+                        let intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+                        members.push(intern);
+                        nextMem();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
+
+            } else { generateFile() }
+
+
+        } catch (err) {
+            console.log(err);
         }
-
-    } catch (err) {
-        console.error(err)
     }
+
+
+
 }
+
+teamMember();
+
+
+
+function generateFile(data) {
+    console.log(members)
+    fs.writeFile('./dist/Team.html', data, err => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        else {
+            console.log("Team was generated successfully")
+        }
+    }
+    )
+}
+

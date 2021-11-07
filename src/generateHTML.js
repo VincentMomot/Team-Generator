@@ -45,35 +45,36 @@ const createIntern = function (intern) {
 
 </div>`
 }
+const employeeCard = []
 
 generateHTML = (data) => {
 
-    employeeCard = []
+    
 
     for (let i = 0; i < data.length; i++) {
         const employee = data[i]
         const role = employee.getRole();
 
         if (role == "Manager") {
-            const managerCard = generateManager(employee)
+            const managerCard = createManager(employee)
             employeeCard.push(managerCard)
         }
 
         if (role == "Engineer") {
-            const engineerCard = generateEngineer(employee)
+            const engineerCard = createEngineer(employee)
             employeeCard.push(engineerCard)
         }
 
-        if (role == "Ianager") {
-            const internCard = generateIntern(employee)
+        if (role == "Intern") {
+            const internCard = createIntern(employee)
             employeeCard.push(internCard)
         }
     }
 }
 
 const renderEmployees = employeeCard.join('')
-const renderHTML = renderHTMLdoc(renderEmployees)
-return renderHTML;
+const team = renderHTMLdoc(renderEmployees)
+return team;
 
 
 const renderHTMLdoc = function (renderEmployees) {
@@ -97,4 +98,4 @@ const renderHTMLdoc = function (renderEmployees) {
     `
 }
 
-module.exports = generateHTML
+module.exports = generateHTML;
