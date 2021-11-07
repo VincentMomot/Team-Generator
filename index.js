@@ -1,15 +1,10 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer')
-const fs = require('fs')
-const path = require('path')
 const Engineer = require('./lib/engineer')
 const Intern = require('./lib/intern')
 const Manager = require('./lib/manager')
-const Employee = require('./lib/employee')
 const generateHTML = require('./src/generateHTML')
 
-const OUTPUT_DIR = path.resolve(__dirname, "dist")
-const HTMLcreated = path.join(OUTPUT_DIR, "index.html");
 console.log("\nWelcome to team generator!")
 let members = [];
 
@@ -125,8 +120,11 @@ function teamMember() {
                     .catch(function (err) {
                         console.log(err);
                     });
+                    
 
-            } else { generateFile() }
+            } else { 
+                console.log(members)
+                generateHTML(members) }
 
 
         } catch (err) {
@@ -142,17 +140,8 @@ teamMember();
 
 
 
-function generateFile(data) {
-    console.log(members)
-    fs.writeFile('./dist/Team.html', data, err => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        else {
-            console.log("Team was generated successfully")
-        }
-    }
-    )
-}
+
+
+
+
 

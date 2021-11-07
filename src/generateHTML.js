@@ -1,6 +1,6 @@
+const fs = require('fs')
 const createManager = function (manager) {
-    return 
-    ` <div class="employee">
+    return ` <div class="employee">
     <div class="cardTop">    
         <p class=name>${manager.name}</p>
         <p>🏆 Manager</p>
@@ -15,8 +15,7 @@ const createManager = function (manager) {
 }
 
 const createEngineer = function (engineer) {
-    return
-    ` <div class="employee">
+    return ` <div class="employee">
     <div class="cardTop">    
         <p class=name>${engineer.name}</p>
         <p>💡 Engineer</p>
@@ -31,8 +30,8 @@ const createEngineer = function (engineer) {
 }
 
 const createIntern = function (intern) {
-    return
-    ` <div class="employee">
+    console.log("here")
+    return ` <div class="employee">
     <div class="cardTop">    
         <p class=name>${intern.name}</p>
         <p>📝 Intern</p>
@@ -49,7 +48,7 @@ const employeeCard = []
 
 generateHTML = (data) => {
 
-    
+
 
     for (let i = 0; i < data.length; i++) {
         const employee = data[i]
@@ -60,25 +59,28 @@ generateHTML = (data) => {
             employeeCard.push(managerCard)
         }
 
-        if (role == "Engineer") {
+        else if (role == "Engineer") {
+            console.log("hey")
             const engineerCard = createEngineer(employee)
             employeeCard.push(engineerCard)
         }
 
-        if (role == "Intern") {
+        else {
+            console.log("here i am")
             const internCard = createIntern(employee)
             employeeCard.push(internCard)
         }
-    }
+    }   
+    const renderEmployees = employeeCard.join('')
+    renderHTMLdoc(renderEmployees)
+    console.log(renderEmployees)
+
 }
 
-const renderEmployees = employeeCard.join('')
-const team = renderHTMLdoc(renderEmployees)
-return team;
 
 
 const renderHTMLdoc = function (renderEmployees) {
-    return `
+    text= `
     <!DOCTYPE html>
     <html lang="en">
     
@@ -96,6 +98,18 @@ const renderHTMLdoc = function (renderEmployees) {
     ${renderEmployees}
     </div>
     `
+    fs.writeFile('./dist/Team.html', text, err => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        else {
+            console.log("Team was generated successfully")
+        }
+    }
+    )   
 }
+
+
 
 module.exports = generateHTML;
