@@ -12,4 +12,6 @@ This application is used to create a team layout for all members inculding engin
 * Better understanding of Node.js
 
 Screenshots of the site:
-![This is an image of my main page](assets/)
+![This is an image of my main page](./ss.png)
+
+[This is a link to the video walkthrough](https://youtu.be/5fUWh-jQCBw)
