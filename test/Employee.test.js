@@ -14,13 +14,13 @@ it("Can set name via constructor arguments", () => {
 
 it("Can set id via constructor argument", () => {
   const testValue = 1;
-  const employee= new Employee("Foo", testValue);
+  const employee= new Employee("Vince", testValue);
   expect(employee.id).toBe(testValue);
 });
 
 it("Can set email via constructor argument", () => {
   const testValue = "vincemomot@gmial.com";
-  const employee= new Employee("Foo", 1, testValue);
+  const employee= new Employee("Vince", 1, testValue);
   expect(employee.email).toBe(testValue);
 });
 

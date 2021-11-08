@@ -98,7 +98,7 @@ const renderHTMLdoc = function (renderEmployees) {
     ${renderEmployees}
     </div>
     `
-    fs.writeFile('./dist/Team.html', text, err => {
+    fs.writeFile('./dist/index.html', text, err => {
         if (err) {
             console.log(err);
             return;

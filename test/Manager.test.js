@@ -4,13 +4,13 @@ const Manager = require("../lib/Manager");
 
 it("Can set office number via constructor argument", () => {
   const testValue = 100;
-  const e = new Manager("Dave", 1, "test@test.com", testValue);
+  const e = new Manager("Dave", 1, "vincemomot@gmail.com", testValue);
   expect(e.phone).toBe(testValue);
 });
 
 it('getRole() should return "Manager"', () => {
   const testValue = "Manager";
-  const e = new Manager("Foo", 1, "test@test.com", 100);
+  const e = new Manager("alan", 1, "vincemomot@gmail.com", 100);
   expect(e.getRole()).toBe(testValue);
 });
 
